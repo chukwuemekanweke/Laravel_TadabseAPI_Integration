@@ -15,9 +15,9 @@ class TadabaseServicesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of $data_table_reponse.
      *
-     * @return \Illuminate\Http\Response
+     * @return $data_table_reponse
      */
     public function index()
     {
@@ -27,7 +27,6 @@ class TadabaseServicesController extends Controller
         $total_tables = $data_table_reponse->total_items;
 
         return view('pages.data_tables', compact('data_tables', 'reponse_type', 'total_tables'));
-       
     }
 
     /**
@@ -35,9 +34,16 @@ class TadabaseServicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function entity_description(Request $request)
     {
-        //
+        if($request->id) {
+            $describe_table_reponse = $this->tadabaseServices->entity_schema($request->id);
+            $describe_table = $describe_table_reponse->fields;
+            $reponse_type = $describe_table_reponse->type ?? 'N/A';
+
+           return view('pages.schema', compact('describe_table', 'reponse_type'));
+        }
+        
     }
 
     /**

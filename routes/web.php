@@ -16,3 +16,4 @@
 }); */
 
 Route::get('/datatables', 'TadabaseServicesController@index');
+Route::get('/schema/{id}', 'TadabaseServicesController@entity_description');

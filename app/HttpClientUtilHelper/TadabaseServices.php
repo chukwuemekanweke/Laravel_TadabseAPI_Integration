@@ -13,12 +13,18 @@
           $this->client = $client;
       }
 
+      
       public function data_entities()
       {
         return $this->getEndPointRequest('/api/v1/data-tables'); 
 
       }
-      
+
+      public function entity_schema($table_id)
+      {
+        return $this->getEndPointRequest("/api/v1/data-tables/$table_id/fields"); 
+      }
+
       // Get request endpoint
       public function getEndPointRequest($url)
       {
@@ -30,11 +36,7 @@
                 "X-Tadabase-App-Secret" => env('API_SECRET')
             ]
         ]);
-/* 
-          $statusCode = $response->getStatusCode();
-	        $body = $response->getBody()->getContents();
 
-	       return $body; */
         } catch (\Exception $e) {
                 return $e;
         }

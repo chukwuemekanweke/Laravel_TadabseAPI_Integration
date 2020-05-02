@@ -7,7 +7,7 @@
     <p>
         <span>Response type: </span> <span class="mark">{{ $reponse_type }}</span>
     </p>
-    <table class="table table-bordered mt-4" id="data_table">
+    <table class="table table-bordered table-striped table-hover mt-4" id="data_table">
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -22,7 +22,7 @@
                         <td>{{ $table->id}}</td>
                         <td>{{ $table->name}}</td>
                         <td>
-                            <a href="{{ $table->id}}" class="btn btn-info">View</button>
+                            <a href="{{ url('schema/'.$table->id)}}" class="btn btn-info">View</button>
                         </td>
                     </tr>
                 @endforeach
