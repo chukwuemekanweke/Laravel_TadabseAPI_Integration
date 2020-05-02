@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Route::get('/', function () {
+    return view('pages.data_tables');
+}); */
 
 Route::get('/datatables', 'TadabaseServicesController@index');

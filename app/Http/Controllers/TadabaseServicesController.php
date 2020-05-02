@@ -21,8 +21,12 @@ class TadabaseServicesController extends Controller
      */
     public function index()
     {
-        $dataTables = $this->tadabaseServices->data_entities();
-        dd($dataTables);
+        $data_table_reponse = $this->tadabaseServices->data_entities();
+        $data_tables = $data_table_reponse->data_tables;
+        $reponse_type = $data_table_reponse->type ?? 'N/A';
+        $total_tables = $data_table_reponse->total_items;
+
+        return view('pages.data_tables', compact('data_tables', 'reponse_type', 'total_tables'));
        
     }
 
