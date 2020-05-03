@@ -5,8 +5,9 @@
 </div>
 <div class="container mt-5">
     <p>
-        <span>Response type: </span> <span class="mark">{{ $reponse_type }}</span>
+        <span><strong>Response type:</strong> </span> <span class="mark">{{ $response_type }}</span>
     </p>
+    <p><span> <strong>Total Schema(s):</strong></span> <span class="mark">{{ $total_tables }}</span></p>
     <table class="table table-bordered table-striped table-hover mt-4" id="data_table">
         <thead>
           <tr>
@@ -22,7 +23,7 @@
                         <td>{{ $table->id}}</td>
                         <td>{{ $table->name}}</td>
                         <td>
-                            <a href="{{ url('schema/'.$table->id)}}" class="btn btn-info">View</button>
+                            <a href="{{ url('schema/'.$table->id . '/type/' . $table->name )}}" class="btn btn-info">View Schema</button>
                         </td>
                     </tr>
                 @endforeach

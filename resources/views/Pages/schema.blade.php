@@ -4,8 +4,10 @@
     @include('Layout.navbar')
 </div>
 <div class="container mt-5">
+    <h3 class="text-info">Schema for {{ $schema_name ?? 'N/A'}}</h3>
     <p>
-        <span>Response type: </span> <span class="mark">{{ $reponse_type }}</span>
+        <span>Response type: </span> <span class="mark">{{ $response_type }}</span>
+        <a href="{{ url('/schema' . '/' . $schema_id . '/' . 'type/' . $schema_name . '/detail')}}" class="btn btn-outline-success">View Records</a>
     </p>
     <table class="table table-bordered table-striped table-hover mt-4" id="schema_table">
         <thead>

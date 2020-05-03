@@ -20,9 +20,15 @@
 
       }
 
+      // Describe schema entity
       public function entity_schema($table_id)
       {
         return $this->getEndPointRequest("/api/v1/data-tables/$table_id/fields"); 
+      }
+
+      public function show_entity_records($table_id)
+      {
+        return $this->getEndPointRequest("/api/v1/data-tables/$table_id/records"); 
       }
 
       // Get request endpoint
