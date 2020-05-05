@@ -56,7 +56,30 @@ class TadabaseServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => ['required'],
+            'first_name' => ['required', 'min:2', 'max:50'],
+            'middle_name' => ['nullable'],
+            'last_name' => ['required', 'min:2', 'max:50'],
+            'dob' => ['required', 'date'],
+            'email' => ['required', 'email'],
+            'employee_type' => ['required'],
+            'address' => ['required', 'min:2'],
+            'address_two' => ['nullable'],
+            'city' => ['required', 'min:2', 'max:50'],
+            'state' => ['required', 'min:2', 'max:50'],
+            'country' => ['required', 'min:2', 'max:50'],
+            'zip' => ['required'],
+            'img_upload' => ['nullable', 'image']
+        ]);
+        
+        //$form_data = 
+
+        $table_id = 'q3kjZVj6Vb';
+        $describe_table_response = $this->tadabaseServices->employee($table_id, $validatedData);
+        dd($describe_table_response);
+
+        return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
     }
 
     /**

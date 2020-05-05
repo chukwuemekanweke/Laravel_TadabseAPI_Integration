@@ -1,16 +1,17 @@
 @extends('pages.main')
+@section('title', 'Employee Entity')
 @section('content')
 <div class="container-fluid">
     @include('Layout.navbar')
 </div>
 <div class="container mt-5">
     <h3 class="text-info">Records for {{ $schema_name ?? 'N/A'}}</h3>
-    <p>
-        <span>Response type: </span> <span class="mark">{{ $response_type }}</span>
+    <p class="d-flex justify-content-between">
+        <span><strong>Response type: </strong> <span class="mark">{{ $response_type }}</span> </span>
         <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#employeeformmodal">Add New</a>
     </p>
     <p><span> <strong>Total Record(s):</strong></span> <span class="mark">{{ $total_items }}</span></p>
-    <table class="table table-bordered table-striped table-hover mt-4" id="customer_records">
+    <table class="table table-bordered table-striped table-hover mt-4" id="employee_records">
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -18,6 +19,7 @@
             <th scope="col">field_53</th>
             <th scope="col">field_54</th>
             <th scope="col">field_55</th>
+            <th scope="col">field_52</th>
             <th scope="col">field_56</th>
             <th scope="col">Action</th>
           </tr>
@@ -119,6 +121,7 @@
           </button>
         </div>
         <div class="modal-body">
+          <form action="{{ url('employee')}}" enctype="multipart/form-data" method="post">
             <div class="row form-group">
                 <div class="col-md-5">
                     <p><img id="output" width="300" height="400" /></p>
@@ -243,14 +246,21 @@
                         </div>
                         <div class="col-md-8">
                             <input type="text" id="zip" name="zip" class="form-control pull-left" placeholder="Zip">
+                            @csrf
                         </div>
                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="row form-group">
+                <div class="col offset-1">
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                </div>
+               <div class="col">
+                   <button type="submit" class="btn btn-success btn-block">Save</button>
+               </div>
+            </div>
+            
+        </form>
         </div>
       </div>
     </div>
@@ -266,7 +276,7 @@
   </script>
   <script>
       $(document).ready(function() {
-        $('#customer_records').DataTable();
+        $('#employee_records').DataTable();
       });
   </script>
 @endsection

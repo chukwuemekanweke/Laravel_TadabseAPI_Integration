@@ -11,10 +11,11 @@
 |
 */
 
-/* Route::get('/', function () {
-    return view('pages.data_tables');
-}); */
+Route::get('/', function () {
+    return redirect()->route('home');
+});
 
-Route::get('/datatables', 'TadabaseServicesController@index');
+Route::get('/datatables', 'TadabaseServicesController@index')->name('home');
 Route::get('/schema/{id}/type/{name}', 'TadabaseServicesController@entity_description');
-Route::get('/schema/{id}/type/{name}/detail', 'TadabaseServicesController@show');
+Route::get('/schema/{id}/type/{name}/detail', 'TadabaseServicesController@show')->name('schema_detail');
+Route::post('/employee', 'TadabaseServicesController@store');

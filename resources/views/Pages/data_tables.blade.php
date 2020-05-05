@@ -1,4 +1,5 @@
 @extends('pages.main')
+@section('title', 'Entities')
 @section('content')
 <div class="container-fluid">
     @include('Layout.navbar')

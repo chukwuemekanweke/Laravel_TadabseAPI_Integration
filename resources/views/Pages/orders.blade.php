@@ -1,12 +1,13 @@
 @extends('pages.main')
+@section('title', 'Order Entity')
 @section('content')
 <div class="container-fluid">
     @include('Layout.navbar')
 </div>
 <div class="container mt-5">
     <h3 class="text-info">Records for {{ $schema_name ?? 'N/A'}}</h3>
-    <p>
-        <span>Response type: </span> <span class="mark">{{ $response_type }}</span>
+    <p class="d-flex justify-content-between">
+        <span><strong>Response type: </strong> <span class="mark">{{ $response_type }}</span></span> 
         <a href="#" class="btn btn-outline-success">Add New</a>
     </p>
     <p><span> <strong>Total Record(s):</strong></span> <span class="mark">{{ $total_items }}</span></p>
