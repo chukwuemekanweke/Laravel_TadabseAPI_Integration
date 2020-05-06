@@ -5,6 +5,9 @@
     @include('Layout.navbar')
 </div>
 <div class="container mt-5">
+    
+        @include('flash-message')
+
     <h3 class="text-info">Records for {{ $schema_name ?? 'N/A'}}</h3>
     <p class="d-flex justify-content-between">
         <span><strong>Response type: </strong> <span class="mark">{{ $response_type }}</span> </span>
@@ -95,7 +98,13 @@
                     </td>
                     <td>
                         <button class="btn btn-info"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        <form action="/delete_record" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <input type="hidden" name="table_id" value="{{ $schema_id }}">
+                            <input type="hidden" name="record_id" value="{{ $record->id }}">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </form>
                     </td>
                   </tr>
               @endforeach
@@ -246,6 +255,29 @@
                         </div>
                         <div class="col-md-8">
                             <input type="text" id="zip" name="zip" class="form-control pull-left" placeholder="Zip">
+                            @csrf
+                        </div>
+                   </div>
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-6">
+                   <div class="row">
+                        <div class="col-md-4">
+                            <label for="country">Longitude: </label>
+                        </div>
+                        <div class="colmd-8">
+                            <input type="text" id="lng" name="country" class="form-control" placeholder="longitude">
+                        </div>
+                   </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="zip">Latitude: </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="lat" name="lat" class="form-control pull-left" placeholder="Latitude">
                             @csrf
                         </div>
                    </div>

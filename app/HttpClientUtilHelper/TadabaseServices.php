@@ -38,6 +38,32 @@
          return $this->postEndPointRequest("/api/v1/data-tables/$table_id/records", $form_data); 
       }
 
+      // DELETE record
+      public function delete_record($table_id, $record_id)
+      {
+         return $this->deleteEndPointRequest("/api/v1/data-tables/$table_id/records/$record_id"); 
+      }
+
+      // Get request endpoint
+      public function deleteEndPointRequest($url)
+      {
+        try {
+          $response = $this->client->request('DELETE', $url,[
+            'headers' => [
+                "X-Tadabase-App-id" =>  env('API_ID'),
+                "X-Tadabase-App-Key" => env('API_KEY'),
+                "X-Tadabase-App-Secret" => env('API_SECRET')
+            ]
+        ]);
+
+        } catch (\Exception $e) {
+                return $e;
+        }
+    
+        return $this->response_handler($response->getBody()->getContents());
+      }
+
+
       // Get request endpoint
       public function getEndPointRequest($url)
       {
@@ -75,6 +101,7 @@
     
         return $this->response_handler($response->getBody()->getContents());
       }
+      
       public function response_handler($response)
       {
         if ($response) {

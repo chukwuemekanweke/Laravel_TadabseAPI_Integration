@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HttpClientUtilHelper\TadabaseServices;
+use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Support\Facades\Validator;
 
 class TadabaseServicesController extends Controller
 {
@@ -56,7 +58,7 @@ class TadabaseServicesController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'title' => ['required'],
             'first_name' => ['required', 'min:2', 'max:50'],
             'middle_name' => ['nullable'],
@@ -70,16 +72,61 @@ class TadabaseServicesController extends Controller
             'state' => ['required', 'min:2', 'max:50'],
             'country' => ['required', 'min:2', 'max:50'],
             'zip' => ['required'],
-            'img_upload' => ['nullable', 'image']
+            'img_upload' => ['nullable', 'image'],
+            'lng' => ['nullable'],
+            'lat' => ['nullable']
         ]);
         
-        //$form_data = 
+        if($validatedData->fails()) {
+           return back()->with('error','Please supply valid inputs');
+        }
+
+        $employee = new class{};
+        $employee->field_51 = $request->dob;
+
+        $employee->field_52 = new class{};
+        $employee->field_52->address = $request->address;
+        $employee->field_52->address2 = $request->address_two;
+        $employee->field_52->city = $request->city;
+        $employee->field_52->state = $request->state;
+        $employee->field_52->country = $request->country;
+        $employee->field_52->zip = $request->zip;
+        $employee->field_52->lng = $request->lng;
+        $employee->field_52->lat = $request->lat;
+        
+
+        $employee->field_53 = $request->email;
+        
+        
+        $employee->field_54 = new class{};
+
+        if($request->hasFile('img_upload')) {
+
+            Cloudder::upload($request->img_upload);
+            $cloudder_upload = Cloudder::getResult();
+
+            $employee->field_54->src = $cloudder_upload["secure_url"];
+            $employee->field_54->width =$cloudder_upload["width"];
+            $employee->field_54->height = $cloudder_upload["height"];
+            $employee->field_54->public_id = $cloudder_upload["public_id"];
+
+        }
+
+        $employee->field_55 = $request->employee_type;
+        
+        $employee->field_56 = new class{};
+        $employee->field_56->title = $request->title;
+        $employee->field_56->first_name = $request->first_name;
+        $employee->field_56->middle_name = $request->middle_name;
+        $employee->field_56->last_name = $request->last_name;
+
 
         $table_id = 'q3kjZVj6Vb';
-        $describe_table_response = $this->tadabaseServices->employee($table_id, $validatedData);
+
+        $describe_table_response = $this->tadabaseServices->employee($table_id, (array)$employee);
         dd($describe_table_response);
 
-        return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
+       // return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
     }
 
     /**
@@ -90,6 +137,8 @@ class TadabaseServicesController extends Controller
      */
     public function show(Request $request)
     {
+        $schema_id = $request->id;
+
         if($request->id) {
             $data_response = $this->tadabaseServices->show_entity_records($request->id);
             $entity_records = $data_response->items ?? [];
@@ -128,7 +177,7 @@ class TadabaseServicesController extends Controller
                     return $this->index();
             }
 
-            return view("pages.$display_page", compact('entity_records', 'schema_name', 'response_type', 'total_items'));
+            return view("pages.$display_page", compact('entity_records', 'schema_name', 'response_type', 'total_items', 'schema_id'));
         }
     }
 
@@ -158,11 +207,16 @@ class TadabaseServicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $table_id
+     * @param string $record_id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        $deleted = $this->tadabaseServices->delete_record($request->table_id, $request->record_id);
+       // dd($deleted);
+       return back()->with('success','Record deleted successfully');
     }
 }

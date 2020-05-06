@@ -19,3 +19,4 @@ Route::get('/datatables', 'TadabaseServicesController@index')->name('home');
 Route::get('/schema/{id}/type/{name}', 'TadabaseServicesController@entity_description');
 Route::get('/schema/{id}/type/{name}/detail', 'TadabaseServicesController@show')->name('schema_detail');
 Route::post('/employee', 'TadabaseServicesController@store');
+Route::delete('/delete_record', 'TadabaseServicesController@destroy');
