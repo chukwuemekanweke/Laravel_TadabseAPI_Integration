@@ -61,7 +61,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                       <div class="row mt-3">
-                        <div class="col-md-4"><label for="country">Job <span class="required"><sup>*</sup></span>: </label></div>
+                        <div class="col-md-4"><label for="name">Job <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="name" placeholder="Job" required>
                             @csrf
