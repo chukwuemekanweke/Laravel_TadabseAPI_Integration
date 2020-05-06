@@ -35,14 +35,18 @@
                     <td>{{ $record->field_51 }}</td>
                     <td>{{ $record->field_53 }}</td>
                     <td>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <img src="{{ $record->field_54->src }}" alt="na"  class="w-100 rounded">
-                            </li>
-                            <li class="list-group-item">{{ 'width: ' . $record->field_54->width }}</li>
-                            <li class="list-group-item">{{ 'height: ' . $record->field_54->height }}</li>
-                            <li class="list-group-item">{{ 'public_id: ' .  $record->field_54->public_id }}</li>
-                        </ul>
+                        @if($record->field_54 != '')
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <img src="{{ $record->field_54->src }}" alt="na"  class="w-100 rounded">
+                                </li>
+                                <li class="list-group-item">{{ 'width: ' . $record->field_54->width }}</li>
+                                <li class="list-group-item">{{ 'height: ' . $record->field_54->height }}</li>
+                                <li class="list-group-item">{{ 'public_id: ' .  $record->field_54->public_id }}</li>
+                            </ul>
+                            @else 
+                            <li class="list-group-item">{{ 'n/a' }}</li>
+                        @endif
                     </td>
                     <td>{{ ($record->field_55 != '') ? $record->field_55 : '-' }}</td>
                     <td>
@@ -97,7 +101,7 @@
                         </ul>
                     </td>
                     <td>
-                        <button class="btn btn-info"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-info"><i class="fa fa-pencil" data-toggle="modal" data-target="#employeeformmodalupdate"></i></button>
                         <form action="/delete_record" method="POST">
                             @csrf
                             @method("DELETE")
@@ -298,6 +302,187 @@
     </div>
   </div>
       {{-- modal end --}}
+      
+      {{-- update modal --}}
+      <div class="modal fade" id="employeeformmodalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ModalScrollableTitle">Employee Update</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{{ url('employee')}}" enctype="multipart/form-data" method="post">
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <p><img id="output" width="300" height="400" /></p>
+                        <input type="file" class="form-control-file" name="img_upload" accept="image/*" name="image" id="file"  onchange="loadFile(event)">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-4"><label for="title">Title: </label></div>
+                            <div class="col-md-8">
+                                <select name="title" class="form-control" name="title">
+                                    <option value="" selected>Choose</option>
+                                    <option value="Mr" selected>Mr.</option>
+                                    <option value="Miss" selected>Miss.</option>
+                                    <option value="Mrs" selected>Mrs.</option>
+                                    <option value="Dr" selected>Dr.</option>
+                                    <option value="Prof" selected>Prof.</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="first_name_update">First Name: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="middle_name_update">Middle Name: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="middle_name" placeholder="Middle Name">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="last_name_update">Last Name: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="dob_update">Date of Birth: </label></div>
+                            <div class="col-md-8">
+                                <input type="date" name="dob" class="form-control" placeholder="mm/dd/yyyy">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="email_update">Email: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="email" placeholder="me@domain.com">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="employee_type_update">Employee Type: </label></div>
+                            <div class="col-md-8">
+                                <select name="employee_type" id="employee_type_update" class="form-control">
+                                    <option value="" selected>Choose</option>
+                                    <option value="Logistic Driver">Logistic Driver</option>
+                                    <option value="Sales Clerk">Sales Clerk</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
+                       <div class="row">
+                            <div class="col-md-4">
+                                <label for="address_update">Address: </label>
+                            </div>
+                            <div class="colmd-8">
+                                <input type="text" id="address_update" name="address" class="form-control" placeholder="Address">
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="address_two_update">Address 2: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" id="address_two_update" name="address_two" class="form-control pull-left" placeholder="Address 2">
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
+                       <div class="row">
+                            <div class="col-md-4">
+                                <label for="city">City: </label>
+                            </div>
+                            <div class="colmd-8">
+                                <input type="text" id="city_update" name="city" class="form-control" placeholder="City">
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="state">State: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" id="state_update" name="state" class="form-control pull-left" placeholder="State">
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
+                       <div class="row">
+                            <div class="col-md-4">
+                                <label for="country">Country: </label>
+                            </div>
+                            <div class="colmd-8">
+                                <input type="text" id="country_update" name="country" class="form-control" placeholder="Country">
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="zip_update">Zip: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" id="zip_update" name="zip" class="form-control pull-left" placeholder="Zip">
+                                @csrf
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
+                       <div class="row">
+                            <div class="col-md-4">
+                                <label for="country">Longitude: </label>
+                            </div>
+                            <div class="colmd-8">
+                                <input type="text" id="lng_update" name="country" class="form-control" placeholder="longitude">
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="zip_update">Latitude: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" id="lat_update" name="lat" class="form-control pull-left" placeholder="Latitude">
+                                @csrf
+                                @method('PUT')
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col offset-1">
+                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                    </div>
+                   <div class="col">
+                       <button type="submit" class="btn btn-success btn-block">Save Changes</button>
+                   </div>
+                </div>
+                
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- update modal end --}}
 </div>
   @section('scripts')
   <script>
@@ -309,6 +494,7 @@
   <script>
       $(document).ready(function() {
         $('#employee_records').DataTable();
+       
       });
   </script>
 @endsection

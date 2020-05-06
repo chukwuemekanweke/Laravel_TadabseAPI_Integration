@@ -79,26 +79,28 @@
         } catch (\Exception $e) {
                 return $e;
         }
-    
+        
         return $this->response_handler($response->getBody()->getContents());
       }
     
       public function postEndPointRequest($url, $data)
       {
+        
         try {
-          $response = $this->client->request('POST', $url, $data, [
+          $response = $this->client->request('POST', $url, [
             'headers' => [
-                "X-Tadabase-App-id" =>  env('API_ID'),
-                "X-Tadabase-App-Key" => env('API_KEY'),
-                "X-Tadabase-App-Secret" => env('API_SECRET'),
-                "Content-Type" => "application/x-www-form-urlencoded",
-            ]
+                'X-Tadabase-App-id' =>  env('API_ID'),
+                'X-Tadabase-App-Key' => env('API_KEY'),
+                'X-Tadabase-App-Secret' => env('API_SECRET'),
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => $data,
         ]);
 
         } catch (\Exception $e) {
                 return $e;
         }
-    
+       
         return $this->response_handler($response->getBody()->getContents());
       }
       

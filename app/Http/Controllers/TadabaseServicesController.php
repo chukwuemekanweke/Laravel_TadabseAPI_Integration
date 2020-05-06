@@ -26,7 +26,7 @@ class TadabaseServicesController extends Controller
         $data_table_response = $this->tadabaseServices->data_entities();
         $data_tables = $data_table_response->data_tables;
         $response_type = $data_table_response->type ?? 'N/A';
-        $total_tables = $data_table_response->total_items;
+        $total_tables = $data_table_response->total_items ?? 0;
 
         return view('pages.data_tables', compact('data_tables', 'response_type', 'total_tables'));
     }
@@ -72,7 +72,7 @@ class TadabaseServicesController extends Controller
             'state' => ['required', 'min:2', 'max:50'],
             'country' => ['required', 'min:2', 'max:50'],
             'zip' => ['required'],
-            'img_upload' => ['nullable', 'image'],
+            'img_upload' => ['image'],
             'lng' => ['nullable'],
             'lat' => ['nullable']
         ]);
@@ -106,7 +106,7 @@ class TadabaseServicesController extends Controller
             $cloudder_upload = Cloudder::getResult();
 
             $employee->field_54->src = $cloudder_upload["secure_url"];
-            $employee->field_54->width =$cloudder_upload["width"];
+            $employee->field_54->width =  $cloudder_upload["width"];
             $employee->field_54->height = $cloudder_upload["height"];
             $employee->field_54->public_id = $cloudder_upload["public_id"];
 
@@ -124,9 +124,9 @@ class TadabaseServicesController extends Controller
         $table_id = 'q3kjZVj6Vb';
 
         $describe_table_response = $this->tadabaseServices->employee($table_id, (array)$employee);
-        dd($describe_table_response);
+        
 
-       // return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
+        return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
     }
 
     /**
