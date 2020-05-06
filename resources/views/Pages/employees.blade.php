@@ -137,14 +137,14 @@
           <form action="{{ url('employee')}}" enctype="multipart/form-data" method="post">
             <div class="row form-group">
                 <div class="col-md-5">
-                    <p><img id="output" width="300" height="400" /></p>
+                    <p><img id="output" width="300" height="400" /><span class="required"><sup>*</sup></span></p>
                     <input type="file" class="form-control-file" name="img_upload" accept="image/*" name="image" id="file"  onchange="loadFile(event)">
                 </div>
                 <div class="col-md-7">
                     <div class="row">
-                        <div class="col-md-4"><label for="title">Title: </label></div>
+                        <div class="col-md-4"><label for="title">Title <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <select name="title" class="form-control" name="title">
+                            <select name="title" class="form-control" name="title" required>
                                 <option value="" selected>Choose</option>
                                 <option value="Mr" selected>Mr.</option>
                                 <option value="Miss" selected>Miss.</option>
@@ -155,9 +155,9 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4"><label for="first_name">First Name: </label></div>
+                        <div class="col-md-4"><label for="first_name">First Name <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -167,27 +167,27 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4"><label for="last_name">Last Name: </label></div>
+                        <div class="col-md-4"><label for="last_name">Last Name <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4"><label for="dob">Date of Birth: </label></div>
+                        <div class="col-md-4"><label for="dob">Date of Birth <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <input type="date" name="dob" class="form-control" placeholder="mm/dd/yyyy">
+                            <input type="date" name="dob" class="form-control" placeholder="mm/dd/yyyy" required>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4"><label for="email">Email: </label></div>
+                        <div class="col-md-4"><label for="email">Email <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="email" placeholder="me@domain.com">
+                            <input type="text" class="form-control" name="email" placeholder="me@domain.com" required>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4"><label for="employee_type">Employee Type: </label></div>
+                        <div class="col-md-4"><label for="employee_type">Employee Type <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <select name="employee_type" id="employee_type" class="form-control">
+                            <select name="employee_type" id="employee_type" class="form-control" required>
                                 <option value="" selected>Choose</option>
                                 <option value="Logistic Driver">Logistic Driver</option>
                                 <option value="Sales Clerk">Sales Clerk</option>
@@ -201,10 +201,10 @@
                 <div class="col-md-6">
                    <div class="row">
                         <div class="col-md-4">
-                            <label for="address">Address: </label>
+                            <label for="address">Address <span class="required"><sup>*</sup></span>: </label>
                         </div>
                         <div class="colmd-8">
-                            <input type="text" id="address" name="address" class="form-control" placeholder="Address">
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
                         </div>
                    </div>
                 </div>
@@ -223,20 +223,20 @@
                 <div class="col-md-6">
                    <div class="row">
                         <div class="col-md-4">
-                            <label for="city">City: </label>
+                            <label for="city">City <span class="required"><sup>*</sup></span>: </label>
                         </div>
                         <div class="colmd-8">
-                            <input type="text" id="city" name="city" class="form-control" placeholder="City">
+                            <input type="text" id="city" name="city" class="form-control" placeholder="City" required>
                         </div>
                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="state">State: </label>
+                            <label for="state">State <span class="required"><sup>*</sup></span>: </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" id="state" name="state" class="form-control pull-left" placeholder="State">
+                            <input type="text" id="state" name="state" class="form-control pull-left" placeholder="State" required>
                         </div>
                    </div>
                 </div>
@@ -245,20 +245,20 @@
                 <div class="col-md-6">
                    <div class="row">
                         <div class="col-md-4">
-                            <label for="country">Country: </label>
+                            <label for="country">Country <span class="required"><sup>*</sup></span>: </label>
                         </div>
                         <div class="colmd-8">
-                            <input type="text" id="country" name="country" class="form-control" placeholder="Country">
+                            <input type="text" id="country" name="country" class="form-control" placeholder="Country" required>
                         </div>
                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="zip">Zip: </label>
+                            <label for="zip">Zip <span class="required"><sup>*</sup></span>: </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" id="zip" name="zip" class="form-control pull-left" placeholder="Zip">
+                            <input type="text" id="zip" name="zip" class="form-control pull-left" placeholder="Zip" required>
                             @csrf
                         </div>
                    </div>

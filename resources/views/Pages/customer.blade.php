@@ -104,6 +104,118 @@
            @endif
         </tbody>
       </table>
+
+            {{-- modal --}}
+      <!-- Modal -->
+      <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Project Form</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{{ url('project')}}" enctype="multipart/form-data" method="post">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                      <div class="row">
+                          <div class="col-md-4"><label for="proj_name">Title: </label></div>
+                          <div class="col-md-8">
+                            <input type="text" name="proj_name" class="form-control" placeholder="Name of project">
+                            @csrf
+                          </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-md-4"><label for="address_one">Address: </label></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="address" placeholder="Address">
+                        </div>
+                    </div>
+                      <div class="row mt-3">
+                        <div class="col-md-4"><label for="country">Country: </label></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="country" placeholder="Country">
+                        </div>
+                    </div>
+                      <div class="row mt-3">
+                        <div class="col-md-4"><label for="city">City: </label></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="city" placeholder="City">
+                        </div>
+                    </div>
+                      <div class="row mt-3">
+                        <div class="col-md-4"><label for="lng">Longitude: </label></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="Longitude" name="lng">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4"><label for="lat">Start Date: </label></div>
+                      <div class="col-md-8">
+                          <input type="datetime-local" class="form-control" placeholder="dd/mm/yyyy" name="start_date">
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-4"><label for="created_on">Created On: </label></div>
+                        <div class="col-md-8">
+                            <input type="date" name="created_on" class="form-control">
+                        </div>
+                      </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="middle_name">Address 2: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="address_two" placeholder="Address 2">
+                            </div>
+                        </div>
+                       
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="state">State: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" name="state" class="form-control" placeholder="State">
+                            </div>
+                        </div>
+                       
+                        <div class="row mt-3">
+                            <div class="col-md-4"><label for="zip">Zip: </label></div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Zip" name="zip">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-md-4"><label for="lat">Latitude: </label></div>
+                          <div class="col-md-8">
+                              <input type="text" class="form-control" placeholder="Latitude" name="lat">
+                          </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-md-4"><label for="lat">Completion Date: </label></div>
+                        <div class="col-md-8">
+                            <input type="datetime-local" class="form-control" placeholder="dd/mm/yyyy" name="end_date">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col offset-1">
+                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                    </div>
+                   <div class="col">
+                       <button type="submit" class="btn btn-success btn-block">Save</button>
+                   </div>
+                </div>
+                
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{-- ./modal --}}
 </div>
   @section('scripts')
   <script>

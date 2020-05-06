@@ -33,7 +33,7 @@
 
       //Post Employee Data
 
-      public function employee($table_id, $form_data)
+      public function save_data($table_id, $form_data)
       {
          return $this->postEndPointRequest("/api/v1/data-tables/$table_id/records", $form_data); 
       }

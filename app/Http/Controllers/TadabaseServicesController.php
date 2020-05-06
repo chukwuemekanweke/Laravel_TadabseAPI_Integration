@@ -123,7 +123,7 @@ class TadabaseServicesController extends Controller
 
         $table_id = 'q3kjZVj6Vb';
 
-        $describe_table_response = $this->tadabaseServices->employee($table_id, (array)$employee);
+        $describe_table_response = $this->tadabaseServices->save_data($table_id, (array)$employee);
         
 
         return redirect()->route('schema_detail', ['id' => $table_id, 'name' => 'employees']);
@@ -216,7 +216,7 @@ class TadabaseServicesController extends Controller
     {
 
         $deleted = $this->tadabaseServices->delete_record($request->table_id, $request->record_id);
-       // dd($deleted);
-       return back()->with('success','Record deleted successfully');
+
+        return back()->with('success','Record deleted successfully');
     }
 }
