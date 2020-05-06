@@ -144,7 +144,7 @@
                     <div class="row">
                         <div class="col-md-4"><label for="title">Title <span class="required"><sup>*</sup></span>: </label></div>
                         <div class="col-md-8">
-                            <select name="title" class="form-control" name="title" required>
+                            <select name="title" class="form-control" required>
                                 <option value="" selected>Choose</option>
                                 <option value="Mr" selected>Mr.</option>
                                 <option value="Miss" selected>Miss.</option>

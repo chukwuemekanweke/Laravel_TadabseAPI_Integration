@@ -20,4 +20,5 @@ Route::get('/schema/{id}/type/{name}', 'TadabaseServicesController@entity_descri
 Route::get('/schema/{id}/type/{name}/detail', 'TadabaseServicesController@show')->name('schema_detail');
 Route::post('/employee', 'TadabaseServicesController@store');
 Route::post('/project', 'ProjectController@store');
+Route::post('/customer', 'CustomerController@store');
 Route::delete('/delete_record', 'TadabaseServicesController@destroy');
