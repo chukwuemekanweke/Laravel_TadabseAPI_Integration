@@ -23,4 +23,5 @@ Route::post('/project', 'ProjectController@store');
 Route::post('/customer', 'CustomerController@store');
 Route::post('/job', 'JobController@store');
 Route::post('/supplier', 'SupplierController@store');
+Route::post('/task', 'TaskController@store');
 Route::delete('/delete_record', 'TadabaseServicesController@destroy');
