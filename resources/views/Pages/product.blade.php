@@ -8,7 +8,7 @@
     <h3 class="text-info">Records for {{ $schema_name ?? 'N/A'}}</h3>
     <p class="d-flex justify-content-between">
         <span><strong>Response type: </strong> <span class="mark">{{ $response_type }}</span></span> 
-        <a href="#" class="btn btn-outline-success">Add New</a>
+        {{-- <a href="#" class="btn btn-outline-success">Add New</a> --}}
     </p>
     <p><span> <strong>Total Record(s):</strong></span> <span class="mark">{{ $total_items }}</span></p>
     <table class="table table-bordered table-striped table-hover mt-4" id="customer_records">
