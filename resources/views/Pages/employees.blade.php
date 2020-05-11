@@ -101,7 +101,7 @@
                         </ul>
                     </td>
                     <td>
-                        <button class="btn btn-info"><i class="fa fa-pencil" data-toggle="modal" data-target="#employeeformmodalupdate"></i></button>
+                        {{-- <button class="btn btn-info"><i class="fa fa-pencil" data-toggle="modal" data-target="#employeeformmodalupdate"></i></button> --}}
                         <form action="/delete_record" method="POST">
                             @csrf
                             @method("DELETE")
