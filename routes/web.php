@@ -18,10 +18,15 @@ Route::get('/', function () {
 Route::get('/datatables', 'TadabaseServicesController@index')->name('home');
 Route::get('/schema/{id}/type/{name}', 'TadabaseServicesController@entity_description');
 Route::get('/schema/{id}/type/{name}/detail', 'TadabaseServicesController@show')->name('schema_detail');
+
 Route::post('/employee', 'TadabaseServicesController@store');
 Route::post('/project', 'ProjectController@store');
 Route::post('/customer', 'CustomerController@store');
+
 Route::post('/job', 'JobController@store');
+Route::put('/job/{id}', 'JobController@update');
+
 Route::post('/supplier', 'SupplierController@store');
 Route::post('/task', 'TaskController@store');
+
 Route::delete('/delete_record', 'TadabaseServicesController@destroy');

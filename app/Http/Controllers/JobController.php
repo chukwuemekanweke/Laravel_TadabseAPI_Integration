@@ -80,7 +80,33 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $validatedData = Validator::make($request->all(), [
+            'name' => ['required', 'min:2']
+        ]);
+        
+        if($validatedData->fails()) {
+           return back()->with('error','Please supply valid inputs');
+        }
+
+        $jobs = new class{};
+        $jobs->field_38 = $request->name;
+
+        $table_id = 'K2ejlOQo9B';
+
+
+       
+        $describe_table_response = $this->tadabaseServices->put_data($table_id, $request->id, (array)$jobs);
+        
+        if(\strtolower($describe_table_response->type) == 'success') {
+           
+            return back()->with('success','Record updated successfully');
+
+        }
+
+        return back()->with('error','Oops!, Something went wrong');
+
+       
     }
 
 }

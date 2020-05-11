@@ -26,13 +26,19 @@
         return $this->getEndPointRequest("/api/v1/data-tables/$table_id/fields"); 
       }
 
+      // Show table records
       public function show_entity_records($table_id)
       {
         return $this->getEndPointRequest("/api/v1/data-tables/$table_id/records"); 
       }
 
-      //Post Employee Data
+      //Put Data
+      public function put_data($table_id, $record_id, $form_data)
+      {
+         return $this->postEndPointRequest("/api/v1/data-tables/$table_id/records/$record_id", $form_data); 
+      }
 
+      //Post data
       public function save_data($table_id, $form_data)
       {
          return $this->postEndPointRequest("/api/v1/data-tables/$table_id/records", $form_data); 
@@ -44,7 +50,7 @@
          return $this->deleteEndPointRequest("/api/v1/data-tables/$table_id/records/$record_id"); 
       }
 
-      // Get request endpoint
+      // Delete request endpoint
       public function deleteEndPointRequest($url)
       {
         try {
@@ -83,6 +89,8 @@
         return $this->response_handler($response->getBody()->getContents());
       }
     
+
+      // Post request endpoint
       public function postEndPointRequest($url, $data)
       {
         
